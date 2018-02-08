@@ -1,7 +1,7 @@
 import org.scalatest.FunSpec
 import Day_1._
 
-class Day_1_TestsTest extends FunSpec {
+class Day_1_Tests extends FunSpec {
   // Exercise 1
   describe("calculateSumForTwoInARow(digits:String)") {
     it("should return None when passed data with non numeric characters") {

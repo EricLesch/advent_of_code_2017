@@ -49,7 +49,7 @@ import scala.util.Try
 //  You can also [Share] this puzzle.
 
 
-object Day_1 extends App {
+object Day_1 {
   // Let's try to solve these problems using tail recursion
   def getArrayOfIntsFromString(digits:String): Option[Array[Int]] = {
     // convert all the characters to ints
