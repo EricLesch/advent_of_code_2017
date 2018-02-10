@@ -49,11 +49,12 @@ import scala.util.Try
 //
 //    If you still want to see it, you can get your puzzle input.
 
-case class MinAndMaxValues(max: Int, min: Int)
-
-case class MultipleValues(higherVal: Int, lowerVal: Int)
 
 object Day_2 {
+    case class MinAndMaxValues(max: Int, min: Int)
+
+    case class MultipleValues(higherVal: Int, lowerVal: Int)
+
     // Exercise 1
     def getCheckSumForRow(row: List[Int]): Int Or ErrorMessage = {
         @tailrec
