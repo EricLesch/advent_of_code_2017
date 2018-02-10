@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f56206d1-9f93-4175-9c71-04febe043463" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Day_4.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/Day_4_Tests.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Day_2.scala" afterPath="$PROJECT_DIR$/src/main/scala/Day_2.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Day_3.scala" afterPath="$PROJECT_DIR$/src/main/scala/Day_3.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala" afterPath="$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -47,7 +45,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Day_4.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Day_4.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Day_4.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="185">
@@ -71,14 +69,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Day_3.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Day_3.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Day_3.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="101" column="25" lean-forward="false" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
+            <state relative-caret-position="555">
+              <caret line="186" column="28" lean-forward="false" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1518233195501" expanded="true" signature="6:2656" ph="..." />
+                <element signature="e#2658#2690#0" expanded="true" />
+                <marker date="1518303888990" expanded="true" signature="6:2656" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,8 +106,8 @@
       <file leaf-file-name="Day_3_Tests.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="381">
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -165,11 +164,11 @@
         <option value="$PROJECT_DIR$/src/test/scala/Day_1_Tests.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Day_1.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/Day_2_Tests.scala" />
-        <option value="$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Day_3.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Day_2.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/Day_4_Tests.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Day_4.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Day_3.scala" />
       </list>
     </option>
   </component>
@@ -276,7 +275,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="ScalaTest.ScalaTests in 'scala'">
+  <component name="RunManager" selected="ScalaTest.Day_3_Tests">
     <configuration name="Day_1_Tests" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
       <module name="adventofcode" />
       <setting name="path" value="Day_1_Tests" />
@@ -413,8 +412,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="ScalaTest.ScalaTests in 'scala'" />
-        <item index="1" class="java.lang.String" itemvalue="ScalaTest.Day_3_Tests" />
+        <item index="0" class="java.lang.String" itemvalue="ScalaTest.Day_3_Tests" />
+        <item index="1" class="java.lang.String" itemvalue="ScalaTest.ScalaTests in 'scala'" />
         <item index="2" class="java.lang.String" itemvalue="ScalaTest.Day_2_Tests" />
         <item index="3" class="java.lang.String" itemvalue="ScalaTest.Day_1_Tests" />
         <item index="4" class="java.lang.String" itemvalue="ScalaTest.Day_1_TestsTest" />
@@ -455,35 +454,35 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.09 at 21h 26m 38s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 47m 08s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 11h 34m 56s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 53m 01s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 11h 59m 49s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 53m 15s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 00m 36s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 53m 39s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 01m 17s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 54m 06s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 02m 08s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 54m 49s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 15m 19s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 56m 51s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 18m 59s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 58m 08s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 23m 46s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 16h 58m 22s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="ScalaTests_in_'scala' - 2018.02.10 at 12h 28m 56s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="Day_3_Tests - 2018.02.10 at 17h 00m 46s.xml">
+      <configuration name="Day_3_Tests" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -506,7 +505,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6695652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3652174" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -523,7 +522,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/Day_3.scala</url>
+          <line>132</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -588,7 +595,8 @@
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1518233195501" expanded="true" signature="6:2656" ph="..." />
+            <element signature="e#2658#2690#0" expanded="true" />
+            <marker date="1518303888990" expanded="true" signature="6:2656" ph="..." />
           </folding>
         </state>
       </provider>
@@ -625,7 +633,8 @@
           <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1518233195501" expanded="true" signature="6:2656" ph="..." />
+            <element signature="e#2658#2690#0" expanded="true" />
+            <marker date="1518303888990" expanded="true" signature="6:2656" ph="..." />
           </folding>
         </state>
       </provider>
@@ -759,27 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Day_3.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="101" column="25" lean-forward="false" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1518233195501" expanded="true" signature="6:2656" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Day_2.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -806,6 +794,28 @@
           <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/Day_3_Tests.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Day_3.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="186" column="28" lean-forward="false" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#2658#2690#0" expanded="true" />
+            <marker date="1518303888990" expanded="true" signature="6:2656" ph="..." />
           </folding>
         </state>
       </provider>

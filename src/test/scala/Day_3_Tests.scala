@@ -36,11 +36,20 @@ class Day_3_Tests extends FunSpec {
         }
     }
 
-    describe("_generateDirectionsList(numberOfSteps: Int): List[Direction.Direction]") {
-        it("should generate a list of step directions for the the given number of steps") {
-            val testList = _generateDirectionsList(20)
 
-            val expectedList = List(Direction.RIGHT, Direction.UP, Direction.LEFT, Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.UP, Direction.UP, Direction.UP, Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN)
+    val expectedList = List(Direction.RIGHT, Direction.UP, Direction.LEFT, Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.RIGHT, Direction.RIGHT, Direction.RIGHT, Direction.UP, Direction.UP, Direction.UP, Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.LEFT, Direction.DOWN, Direction.DOWN, Direction.DOWN, Direction.DOWN)
+
+    describe("_generateDirectionsListImperative(numberOfSteps: Int): List[Direction.Direction]") {
+        it("should generate a list of step directions for the the given number of steps") {
+            val testList = _generateDirectionsListImperative(20)
+
+            assert(testList == expectedList)
+        }
+    }
+
+    describe("_generateDirectionsListFunctional(numberOfSteps: Int): List[Direction.Direction]") {
+        it("should generate a list of step directions for the the given number of steps") {
+            val testList = _generateDirectionsListFunctional(20)
 
             assert(testList == expectedList)
         }

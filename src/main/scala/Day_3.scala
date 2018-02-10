@@ -47,14 +47,17 @@
 //
 //    Your puzzle input was 361527.
 
+import Day_3.Direction.Direction
+
+import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 
 object Day_3 {
     // Exercise 1
     // This solution ignores the whole node thing and just works off the pattern that I could see in the generated values
-    def getFluctuatingInterval(level: Int, nth: Int) : Int = {
+    def getFluctuatingInterval(level: Int, nth: Int): Int = {
         if (nth < level) {
-           nth
+            nth
         } else {
             level - (nth % level)
         }
@@ -76,6 +79,11 @@ object Day_3 {
 
     case class Node(point: Point, value: Int = 0)
 
+    object Pendulum extends Enumeration {
+        type Pendulum = Value
+        val TICK, TOCK = Value
+    }
+
     object Direction extends Enumeration {
         type Direction = Value
         val UP, DOWN, LEFT, RIGHT = Value
@@ -83,8 +91,11 @@ object Day_3 {
 
     val DirectionOrder = Array(Direction.RIGHT, Direction.UP, Direction.LEFT, Direction.DOWN)
 
+
     // Exercise 2
-    def _generateDirectionsList(numberOfSteps: Int): List[Direction.Direction] = {
+
+    // my first shot at writing this algorithm was imperative - the second one is functional
+    def _generateDirectionsListImperative(numberOfSteps: Int): List[Direction.Direction] = {
         val arrayOfDirections: ArrayBuffer[Direction.Direction] = ArrayBuffer()
 
         var directionCounter = 0
@@ -112,8 +123,57 @@ object Day_3 {
         arrayOfDirections.toList
     }
 
+    // the functional one! Which is probably even more confusing than the imperative one unfortunately....
+    def _generateDirectionsListFunctional(numberOfSteps: Int): List[Direction] = {
+        @tailrec
+        def _generateDirections(directionPointer: Int, numberOfStepsInDirection: Int, numberOfStepsInDirectionCounter: Int, pendulumSwing: Pendulum.Pendulum, totalNumberOfStepsRemainingCounter: Int, acc: List[Direction]): List[Direction] = {
+            totalNumberOfStepsRemainingCounter match {
+                case 0 => acc
+                case _ => {
+                    val currentDirectionPointer = directionPointer match {
+                        case 4 => 0
+                        case _ => directionPointer
+                    }
+
+                    val pendulumSwitch = numberOfStepsInDirectionCounter == numberOfStepsInDirection
+
+                    val nextPendulumSwing = if (pendulumSwitch) pendulumSwing match {
+                        case Pendulum.TICK => Pendulum.TOCK
+                        case Pendulum.TOCK => Pendulum.TICK
+                    } else {
+                        pendulumSwing
+                    }
+
+                    val nextNumberOfStepsInDirectionCounter = if (pendulumSwitch) 1 else numberOfStepsInDirectionCounter + 1
+
+                    val nextDirectionPointer = if (pendulumSwitch) currentDirectionPointer + 1 else currentDirectionPointer
+
+                    val nextNumberOfStepsInDirection = if (pendulumSwitch && pendulumSwing == Pendulum.TOCK) numberOfStepsInDirection + 1 else numberOfStepsInDirection
+
+                    _generateDirections(
+                        directionPointer = nextDirectionPointer,
+                        numberOfStepsInDirection = nextNumberOfStepsInDirection,
+                        numberOfStepsInDirectionCounter = nextNumberOfStepsInDirectionCounter,
+                        pendulumSwing = nextPendulumSwing,
+                        totalNumberOfStepsRemainingCounter = totalNumberOfStepsRemainingCounter - 1,
+                        acc = DirectionOrder(currentDirectionPointer) :: acc
+                    )
+                }
+            }
+        }
+
+        _generateDirections(
+            directionPointer = 0,
+            numberOfStepsInDirection = 1,
+            numberOfStepsInDirectionCounter = 1,
+            pendulumSwing = Pendulum.TICK,
+            totalNumberOfStepsRemainingCounter = numberOfSteps,
+            acc = List()
+        ).reverse
+    }
+
     def _generateNodeList(numberOfSteps: Int): List[Node] = {
-        val stepDirections = _generateDirectionsList(numberOfSteps)
+        val stepDirections = _generateDirectionsListFunctional(numberOfSteps)
 
         val nodeList = List(Node(Point(x = 0, y = 0), value = 1))
 
@@ -148,6 +208,6 @@ object Day_3 {
 
     def getNodeWithHigherValue(value: Int): Option[Node] = {
         // this is a bit lazy and definitely suboptimal - more optimal would be progressively generating nodes until you get the value you need
-        _generateNodeList(200).find((node:Node) => node.value > value)
+        _generateNodeList(200).find((node: Node) => node.value > value)
     }
 }
