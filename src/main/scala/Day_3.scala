@@ -93,37 +93,6 @@ object Day_3 {
 
 
     // Exercise 2
-
-    // my first shot at writing this algorithm was imperative - the second one is functional
-    def _generateDirectionsListImperative(numberOfSteps: Int): List[Direction.Direction] = {
-        val arrayOfDirections: ArrayBuffer[Direction.Direction] = ArrayBuffer()
-
-        var directionCounter = 0
-        var numOfStepsToTakeInEachDirectionCounter = 1
-
-        import scala.util.control.Breaks._
-        breakable {
-            var i = 0
-            while (true) {
-                for (_ <- 1 to 2) {
-                    var currentDirection = DirectionOrder(directionCounter % DirectionOrder.length)
-                    for (_ <- 1 to numOfStepsToTakeInEachDirectionCounter) {
-                        arrayOfDirections += currentDirection
-                        i += 1
-                        if (i == numberOfSteps) {
-                            break
-                        }
-                    }
-                    directionCounter += 1
-                }
-                numOfStepsToTakeInEachDirectionCounter += 1
-            }
-        }
-
-        arrayOfDirections.toList
-    }
-
-    // the functional one! Which is probably even more confusing than the imperative one unfortunately....
     def _generateDirectionsListFunctional(numberOfSteps: Int): List[Direction] = {
         @tailrec
         def _generateDirections(directionPointer: Int, numberOfStepsInDirection: Int, numberOfStepsInDirectionCounter: Int, pendulumSwing: Pendulum.Pendulum, totalNumberOfStepsRemainingCounter: Int, acc: List[Direction]): List[Direction] = {
