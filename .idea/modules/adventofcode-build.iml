@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="adventofcode-build" external.linked.project.path="$MODULE_DIR$/../../project" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" sbt.imports="_root_.sbt.Keys._, _root_.sbt._, _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.scala.xml.{TopScope=&gt;SUB:DOLLARscope}" sbt.resolvers="https://repo1.maven.org/maven2/|maven|public, file:/Users/eric/.sbt/preloaded|maven|local-preloaded, /Users/eric/.ivy2/cache|ivy|Local cache" type="SBT_MODULE" version="4">
+<module external.linked.project.id="adventofcode-build" external.linked.project.path="$MODULE_DIR$/../../project" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" sbt.imports="_root_.sbt.Keys._, _root_.sbt._, _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.scoverage.ScoverageSbtPlugin, _root_.com.codacy.CodacyCoveragePlugin, _root_.scala.xml.{TopScope=&gt;SUB:DOLLARscope}, _root_.scoverage.ScoverageSbtPlugin.autoImport._" sbt.resolvers="https://repo1.maven.org/maven2/|maven|public, file:/Users/eric/.sbt/preloaded/|maven|local-preloaded, /Users/eric/.ivy2/cache|ivy|Local cache" type="SBT_MODULE" version="4">
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../project/target/idea-classes" />
     <output-test url="file://$MODULE_DIR$/../../project/target/idea-test-classes" />
@@ -14,6 +14,41 @@
     <orderEntry type="module-library">
       <library name="SBT: sbt-and-plugins">
         <CLASSES>
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.codacy/codacy-api-scala_2.12/jars/codacy-api-scala_2.12-3.0.2.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.codacy/coverage-parser_2.12/jars/coverage-parser_2.12-2.0.2.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.github.mpilquist/simulacrum_2.12/jars/simulacrum_2.12-0.10.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.googlecode.javaewah/JavaEWAH/bundles/JavaEWAH-0.7.9.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.jcraft/jsch/jars/jsch-0.1.50.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-base_2.12/jars/rapture-base_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-codec_2.12/jars/rapture-codec_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-core_2.12/jars/rapture-core_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-data_2.12/jars/rapture-data_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-io_2.12/jars/rapture-io_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-json-circe_2.12/jars/rapture-json-circe_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-json_2.12/jars/rapture-json_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-mime_2.12/jars/rapture-mime_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-net_2.12/jars/rapture-net_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/com.propensive/rapture-uri_2.12/jars/rapture-uri_2.12-2.0.0-M8.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.4.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/commons-net/commons-net/jars/commons-net-2.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/jars/circe-core_2.12-0.7.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-jawn_2.12/jars/circe-jawn_2.12-0.7.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-numbers_2.12/jars/circe-numbers_2.12-0.7.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.7.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.1.3.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.1.4.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.eclipse.jgit/org.eclipse.jgit/jars/org.eclipse.jgit-3.6.2.201501210735-r.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.6.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.scoverage/scalac-scoverage-plugin_2.12/jars/scalac-scoverage-plugin_2.12-1.3.1.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.spire-math/jawn-parser_2.12/jars/jawn-parser_2.12-0.10.4.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-core_2.12/jars/cats-core_2.12-0.9.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-kernel_2.12/jars/cats-kernel_2.12-0.9.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-macros_2.12/jars/cats-macros_2.12-0.9.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/machinist_2.12/jars/machinist_2.12-0.6.1.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/macro-compat_2.12/jars/macro-compat_2.12-1.1.1.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/scala_2.12/sbt_1.0/com.codacy/sbt-codacy-coverage/jars/sbt-codacy-coverage-1.3.11.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/scala_2.12/sbt_1.0/org.scoverage/sbt-scoverage/jars/sbt-scoverage-1.5.1.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.12.4/lib/jline.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.12.4/lib/scala-compiler.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.12.4/lib/scala-library.jar!/" />
