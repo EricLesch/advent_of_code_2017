@@ -57,7 +57,7 @@ object Day_1 {
       .split("")
       .map((char:String) => Try(char.toInt).toOption)
 
-    // if all the characters weren't Ints then bail with None
+    // if any of the characters weren't Ints then bail with None
     if (arrayOfInts.contains(None)) {
       None
     } else {

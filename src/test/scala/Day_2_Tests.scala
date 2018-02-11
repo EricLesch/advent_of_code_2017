@@ -30,9 +30,9 @@ class Day_2_Tests extends FunSpec {
         describe("getCheckSumForRow(row: List[Int]") {
             it("should calculate the checksums of each row") {
 
-                assert(getCheckSumForRow(firstRow).get == 8)
-                assert(getCheckSumForRow(secondRow).get == 4)
-                assert(getCheckSumForRow(thirdRow).get == 6)
+                assert(getCheckSumForRow(firstRow).getOrElse(-1) == 8)
+                assert(getCheckSumForRow(secondRow).getOrElse(-1) == 4)
+                assert(getCheckSumForRow(thirdRow).getOrElse(-1) == 6)
             }
         }
 
@@ -45,7 +45,7 @@ class Day_2_Tests extends FunSpec {
                             secondRow,
                             thirdRow
                         )
-                    ).get == 18
+                    ).getOrElse(-1) == 18
                 )
 
             }
@@ -57,7 +57,7 @@ class Day_2_Tests extends FunSpec {
 
                 val listOfInts: scalactic.Or[List[Int], ErrorMessage] = createListOfInts(testRow)
 
-                assert(listOfInts.get.nonEmpty)
+                assert(listOfInts.getOrElse(Nil).nonEmpty)
             }
 
             it("should return an error is passed bad data") {
@@ -81,13 +81,14 @@ class Day_2_Tests extends FunSpec {
             it("it should return the correct result") {
                 val result: scalactic.Or[Int, ErrorMessage] = getSolutionFromLinesOfText(testData)
 
-                assert(result.get == 36174)
+                assert(result.getOrElse(-1) == 36174)
             }
         }
 
         describe("getMultipleOfInt(num: Int, elementsToMatchAgainst: List[Int]) : Option[MultipleValues]")  {
             it ("it should find numbers that are multiples of each other") {
-                val valuePair: MultipleValues = getMultipleOfInt(2, List(5, 9, 8)).get
+                val default = MultipleValues(-1, -1)
+                val valuePair: MultipleValues = getMultipleOfInt(2, List(5, 9, 8)).getOrElse(default)
 
                 assert(valuePair.higherVal == 8)
                 assert(valuePair.lowerVal == 2)
@@ -96,17 +97,18 @@ class Day_2_Tests extends FunSpec {
 
         describe("getMultiplesInLine(listOfInt: List[Int]): Option[MultipleValues]") {
             it("should return the correct results for different values") {
-                val valuePair: MultipleValues = getMultiplesInLine(List(5,9,2,8)).get
+                val default = MultipleValues(-1, -1)
+                val valuePair: MultipleValues = getMultiplesInLine(List(5,9,2,8)).getOrElse(default)
 
                 assert(valuePair.higherVal == 8)
                 assert(valuePair.lowerVal == 2)
 
-                val valuePair2: MultipleValues = getMultiplesInLine(List(9,4,7,3)).get
+                val valuePair2: MultipleValues = getMultiplesInLine(List(9,4,7,3)).getOrElse(default)
 
                 assert(valuePair2.higherVal == 9)
                 assert(valuePair2.lowerVal == 3)
 
-                val valuePair3: MultipleValues = getMultiplesInLine(List(3,8,6,5)).get
+                val valuePair3: MultipleValues = getMultiplesInLine(List(3,8,6,5)).getOrElse(default)
 
                 assert(valuePair3.higherVal == 6)
                 assert(valuePair3.lowerVal == 3)
@@ -140,7 +142,7 @@ class Day_2_Tests extends FunSpec {
 
         describe("getCheckSumForMultiplesStringOfRows(stringOfRows:String): Int") {
             it("should return the correct result for the test data") {
-                assert(getCheckSumForMultiplesStringOfRows(testData).get == 244)
+                assert(getCheckSumForMultiplesStringOfRows(testData).getOrElse(-1) == 244)
             }
         }
     }

@@ -80,9 +80,11 @@ class Day_3_Tests extends FunSpec {
 
     describe("getNodeWithHigherValue(value:Int): : Option[Node]") {
         it("should return the first node that has a higher value than the passed value") {
-            assert(getNodeWithHigherValue(2).get.value == 4)
+            val defaultGetOrElse = Node(Point(-1, -1), -1)
 
-            assert(getNodeWithHigherValue(361527).get.value == 363010)
+            assert(getNodeWithHigherValue(2).getOrElse(defaultGetOrElse).value == 4)
+
+            assert(getNodeWithHigherValue(361527).getOrElse(defaultGetOrElse).value == 363010)
         }
     }
 }
