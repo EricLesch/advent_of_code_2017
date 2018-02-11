@@ -1,8 +1,3 @@
-import org.scalactic.{Bad, ErrorMessage, Good, Or}
-
-import scala.annotation.tailrec
-import scala.util.Try
-
 //    --- Day 2: Corruption Checksum ---
 //    As you walk through the door, a glowing humanoid shape yells in your direction. "You there! Your state appears to be idle. Come help us repair the corruption in this spreadsheet - if we take another millisecond, we'll have to display an hourglass cursor!"
 //
@@ -49,6 +44,10 @@ import scala.util.Try
 //
 //    If you still want to see it, you can get your puzzle input.
 
+import org.scalactic.{Bad, ErrorMessage, Good, Or}
+
+import scala.annotation.tailrec
+import scala.util.Try
 
 object Day_2 {
     case class MinAndMaxValues(max: Int, min: Int)
