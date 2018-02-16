@@ -65,9 +65,7 @@
 //    Both parts of this puzzle are complete! They provide two gold stars: **
 
 
-
 import scala.annotation.tailrec
-import scala.util.Try
 
 object Day_7 {
 
@@ -85,8 +83,11 @@ object Day_7 {
                           name: String,
                           value: A) extends Node
 
-    case class ListOfNodes(branches: List[Branch[Int]], leaves: List[Leaf[Int]])
-
+    /**
+      * Parses data and returns a brnach
+      * @param line
+      * @return
+      */
     def parseBranch(line: String): Branch[Int] = {
         val parts = line.split("->")
         val nameAndValue: Array[String] = parts(0).trim.split(" ")
@@ -99,6 +100,11 @@ object Day_7 {
         )
     }
 
+    /**
+      * Parses data and returns a leaf
+      * @param line
+      * @return
+      */
     def parseLeaf(line: String): Leaf[Int] = {
         val nameAndValue: Array[String] = line.trim.split(" ")
 
@@ -108,8 +114,14 @@ object Day_7 {
         )
     }
 
+    case class BranchesAndLeaves(branches: List[Branch[Int]], leaves: List[Leaf[Int]])
 
-    def getBranchesAndLeaves(data: String): ListOfNodes = {
+    /**
+      * parses the data and returns two separated lists of branches and leaves
+      * @param data
+      * @return
+      */
+    def getBranchesAndLeaves(data: String): BranchesAndLeaves = {
         val lines: List[String] = data.split("\n").toList
 
         def isBranch(line: String): Boolean = {
@@ -117,7 +129,7 @@ object Day_7 {
         }
 
         @tailrec
-        def _getBranchesAndLeaves(data: List[String], acc: ListOfNodes): ListOfNodes = {
+        def _getBranchesAndLeaves(data: List[String], acc: BranchesAndLeaves): BranchesAndLeaves = {
             data match {
                 case Nil => acc
                 case h :: t => {
@@ -145,27 +157,38 @@ object Day_7 {
 
         _getBranchesAndLeaves(
             data = lines,
-            acc = ListOfNodes(
+            acc = BranchesAndLeaves(
                 branches = List(),
                 leaves = List()
             )
         )
     }
 
-    @tailrec
-    def _getMapOfChildrenToParents(listOfBranches: List[Branch[Int]], acc: Map[String, String]): Map[String, String] = {
-        listOfBranches match {
-            case Nil => acc
-            case h :: t => {
-                _getMapOfChildrenToParents(t, acc ++ h.nodeNames.map(nodeName => (nodeName, h.name)))
+    /**
+      * Returns a map of node names and the names of their corresponding parent nodes
+      * @param listOfBranches
+      * @return
+      */
+    def getMapOfChildrenToParents(listOfBranches: List[Branch[Int]]): Map[String, String] = {
+
+        @tailrec
+        def _getMapOfChildrenToParents(listOfBranches: List[Branch[Int]], acc: Map[String, String]): Map[String, String] = {
+            listOfBranches match {
+                case Nil => acc
+                case h :: t => {
+                    _getMapOfChildrenToParents(t, acc ++ h.nodeNames.map(nodeName => (nodeName, h.name)))
+                }
             }
         }
-    }
 
-    def getMapOfChildrenToParents(listOfBranches: List[Branch[Int]]): Map[String, String] = {
         _getMapOfChildrenToParents(listOfBranches, Map())
     }
 
+    /**
+      * Returns the name of the root node of the tree
+      * @param childToParentMap
+      * @return
+      */
     def getRootNode(childToParentMap: Map[String, String]): String = {
 
         @tailrec
@@ -178,7 +201,6 @@ object Day_7 {
         }
 
         _getRootNode(childToParentMap, childToParentMap.keys.last)
-
     }
 
     //  Exercise 1 entry point
@@ -190,27 +212,12 @@ object Day_7 {
         getRootNode(mapOfChildrenToParents)
     }
 
-    @tailrec
-    def addNodesToBranches(mapOfBranches: Map[String, Branch[Int]], listOfLeaves: List[Node[Int]], mapOfChildrenToParents: Map[String, String]): Map[String, Branch[Int]] = {
-        listOfLeaves match {
-            case Nil => mapOfBranches
-            case h :: t => {
-                val parentNameOption: Option[String] = Try(mapOfChildrenToParents(h.name)).toOption
-                parentNameOption match {
-                    case Some(parentName) => {
-                        val parentBranch = mapOfBranches(parentName)
-                        val newParentBranch: Branch[Int] = parentBranch.copy(nodes = h :: parentBranch.nodes)
-                        val newMapOfBranches = mapOfBranches + (parentName -> newParentBranch)
-                        addNodesToBranches(newMapOfBranches, t, mapOfChildrenToParents)
-                    }
-                    case None => {
-                        addNodesToBranches(mapOfBranches, t, mapOfChildrenToParents)
-                    }
-                }
-            }
-        }
-    }
-
+    /**
+      * Determines if all of the children of this node are connected to this node
+      * @param node
+      * @tparam A
+      * @return
+      */
     def hasAllChildrenConnected[A](node: Node[A]): Boolean = {
         node match {
             case _: Leaf[_] => true
@@ -218,6 +225,13 @@ object Day_7 {
         }
     }
 
+    /**
+      * Determines if the children of the given node have all of *their* children connected already
+      * @param node
+      * @param mapOfNodes
+      * @tparam A
+      * @return
+      */
     def immediateChildrenHaveAllChildrenConnected[A](node: Node[A], mapOfNodes: Map[String, Node[A]]): Boolean = {
         node match {
             case _: Leaf[_] => true
@@ -230,8 +244,8 @@ object Day_7 {
     }
 
     /**
-      * Assembles a tree from a set of Nodes, the first
-      * @param mapOfNodes - a map of nodenames to Nodes
+      * Assembles a tree from a map of Nodes, the first node should be the root node of the returned tree
+      * @param mapOfNodes  - a map of nodenames to Nodes
       * @param currentNode - the root node of the tree
       * @tparam A
       * @return
@@ -248,18 +262,18 @@ object Day_7 {
             currentNode match {
                 case _: Leaf[_] => mapOfNodes
                 case branch: Branch[_] => {
-                   val unconnectedNodeNames =
-                       branch.nodeNames.filter(
-                           (nodeName: String) => !hasAllChildrenConnected(mapOfNodes(nodeName))
-                       )
+                    val unconnectedNodeNames =
+                        branch.nodeNames.filter(
+                            (nodeName: String) => !hasAllChildrenConnected(mapOfNodes(nodeName))
+                        )
 
                     val updatedMapOfNodes: Map[String, Node[A]] = unconnectedNodeNames.foldLeft(mapOfNodes)(
                         (mapOfNodes, nodeName: String) => assembleNodes(mapOfNodes, mapOfNodes(nodeName))
                     )
 
-                    val newBranch = branch.copy(nodes = branch.nodeNames.map((nodeName:String) => {
-                        updatedMapOfNodes(nodeName)
-                    }))
+                    val newBranch = branch.copy(
+                        nodes = branch.nodeNames.map(updatedMapOfNodes(_))
+                    )
 
                     updatedMapOfNodes + (newBranch.name -> newBranch)
                 }
@@ -267,16 +281,27 @@ object Day_7 {
         }
     }
 
+    /**
+      * For a given node, sum the value of the node and the values of all descendant nodes
+      * @param node
+      * @return
+      */
     def getSumOfNode(node: Node[Int]): Int = {
         node match {
             case branch: Branch[Int] => {
-                    branch.value + branch.nodes.foldLeft(0)((acc, node: Node[Int]) => acc + getSumOfNode(node))
-                }
+                branch.value + branch.nodes.foldLeft(0)((acc, node: Node[Int]) => acc + getSumOfNode(node))
+            }
             case leaf: Leaf[Int] => leaf.value
         }
     }
 
-    def constructTree[A](listOfNodes: ListOfNodes): Node[A] = {
+    /**
+      * Construct a tree from the passed lists of branches and leaves
+      * @param listOfNodes
+      * @tparam A
+      * @return the root node of the tree
+      */
+    def constructTree[A](listOfNodes: BranchesAndLeaves): Node[A] = {
         val rootNodeName: String = getRootNode(getMapOfChildrenToParents(listOfNodes.branches))
 
         val listOfAllNodes: List[Node[A]] = listOfNodes.branches ::: listOfNodes.leaves
@@ -295,12 +320,18 @@ object Day_7 {
                                              unbalancedChildSum: Int,
                                              otherChildrenSum: Int)
 
+    /**
+      * Searches down through the tree until it finds the deepest instance of an unbalanced branch
+      * @param node
+      * @param currentResult
+      * @return information relating to the unbalanced branch and its children
+      */
     @tailrec
-    def findUnbalancedBranch(node: Node[Int], currentResult: Option[FindUnbalancedBranchResult]) : Option[FindUnbalancedBranchResult] = {
+    def findUnbalancedBranch(node: Node[Int], currentResult: Option[FindUnbalancedBranchResult]): Option[FindUnbalancedBranchResult] = {
         node match {
             case branch: Branch[Int] => {
                 val sumMap: Map[Int, List[Int]] = branch.nodes.map(getSumOfNode).groupBy(identity)
-                if(sumMap.toSet.size != 1) {
+                if (sumMap.toSet.size != 1) {  // the sums of the children nodes aren't all the same
                     val leastCommonSum: Int = sumMap.minBy(_._2.size)._1
                     val mostCommonSum: Int = sumMap.maxBy(_._2.size)._1
                     val unbalancedChild: Node[Int] = branch.nodes.filter(getSumOfNode(_) == leastCommonSum).head
@@ -326,21 +357,36 @@ object Day_7 {
         }
     }
 
-
+    /**
+      * Parses the data and returns the root node of the tree
+      * @param data
+      * @tparam A
+      * @return
+      */
     def constructTreeFromData[A](data: String): Node[A] = {
         val listOfNodes = getBranchesAndLeaves(data)
 
         constructTree(listOfNodes)
     }
 
-    // clearly there must be a better way to do this but I am a noob at this point and not experienced with covariant abstract classes
-    def getValueOfNode(node:Node[Int]):Int = {
+    /**
+      * Gets the value of a node using pattern matching - I had a hard time moving the property *value* up to the Node class so this is
+      * the crappy workaround. Clearly there must be a better way to do this but I am a noob at this point and not experienced
+      * with covariant abstract classes
+      * @param node
+      * @return
+      */
+    def getValueOfNode(node: Node[Int]): Int = {
         node match {
             case branch: Branch[Int] => branch.value
             case leaf: Leaf[Int] => leaf.value
         }
     }
 
+    /**
+      * @param nodeName the name of the unbalanced node
+      * @param correctValue what the value of the node should be to have a balanced tree
+      */
     case class Exercise2Result(nodeName: String, correctValue: Int)
 
     // Exercise 2 Entry Point
@@ -360,5 +406,3 @@ object Day_7 {
         }
     }
 }
-
-
