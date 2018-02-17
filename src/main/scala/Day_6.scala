@@ -87,12 +87,13 @@ object Day_6 {
 
             val newResultHistory = resultHistory + (currentResultsKey -> numberOfTimesProcessed)
 
-            hasRepeatedBanksInHistory match {
-                case true => ProcessUntilEquilibriumResult(
-                   totalNumberOfSteps = numberOfTimesProcessed,
-                   distanceBetweenSteps = distanceSinceRepeated
+            if (hasRepeatedBanksInHistory) {
+                ProcessUntilEquilibriumResult(
+                    totalNumberOfSteps = numberOfTimesProcessed,
+                    distanceBetweenSteps = distanceSinceRepeated
                 )
-                case false => _processUntilEquilibrium(bankRegisterWithRedistributedBlocks, numberOfTimesProcessed + 1, newResultHistory)
+            } else {
+                _processUntilEquilibrium(bankRegisterWithRedistributedBlocks, numberOfTimesProcessed + 1, newResultHistory)
             }
         }
 
