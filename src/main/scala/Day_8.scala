@@ -44,21 +44,40 @@ object Day_8 {
         val EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN, LESS_THAN_OR_EQUAL_TO, NOT_EQUAL_TO = Value
     }
 
+    /**
+      * Splits the data and returns a list of lines that can be parsed into commands
+      * @param data
+      * @return
+      */
     def splitIntoLines(data: String): List[String] = {
         data.split("\n").map(_.trim).toList
     }
 
-    //    b inc 5 if a > 1
-    case class LineData(
-                           registerToModify: String,
-                           command: Command.Command,
-                           amount: Int,
-                           registerCondition: String,
-                           conditionOperation: ConditionOperation.ConditionOperation,
-                           conditionAmount: Int
+    /**
+      * Contains all the relevant information of a command that is needed to execute the command
+      * @param registerToModify the register to increment or decrement if the condition evaluates to true
+      * @param command - the operation increment or decrement
+      * @param amount - the amount to increment or decrement
+      * @param conditionRegister - the register to test - ie apply the conditionOperator
+      * @param conditionOperator - the test to apply to the register (e.g. <, ==, >, etc)
+      * @param conditionValue - the value that the conditionOperator is applying to the conditionRegister
+      */
+    case class CommandData(
+                              registerToModify: String,
+                              command: Command.Command,
+                              amount: Int,
+                              conditionRegister: String,
+                              conditionOperator: ConditionOperation.ConditionOperation,
+                              conditionValue: Int
                        )
 
-    def splitLineIntoCommands(line: String): LineData = {
+    /**
+      * Parse a line of data and
+      * Returns a CommandData object which contains all of the relevant data needed to execute the command
+      * @param line
+      * @return
+      */
+    def splitLineIntoCommands(line: String): CommandData = {
         val chunks: Array[String] = line.trim.split(" ").map(_.trim)
 
         val registerToModify: String = chunks(0)
@@ -83,48 +102,78 @@ object Day_8 {
 
         val conditionAmount = chunks(6).toInt
 
-        LineData(
+        CommandData(
             registerToModify = registerToModify,
             command = command,
             amount = amount,
-            registerCondition = registerCondition,
-            conditionOperation = conditionOperation,
-            conditionAmount = conditionAmount
+            conditionRegister = registerCondition,
+            conditionOperator = conditionOperation,
+            conditionValue = conditionAmount
         )
     }
 
-    def getRegisters(commands: List[LineData]) : List[String] = {
-        commands.flatMap((command) => Array(command.registerToModify, command.registerCondition)).distinct
+    /**
+      * Takes a list of all commands and returns a list of the names of all the referenced registers
+      * @param commands
+      * @return
+      */
+    def getRegisters(commands: List[CommandData]) : List[String] = {
+        commands.flatMap((command) => Array(command.registerToModify, command.conditionRegister)).distinct
     }
 
+    /**
+      * Takes passed the input data and
+      * Returns the names of all the registers in the application
+      * @param data
+      * @return
+      */
     def getAllRegisters(data: String): List[String] = {
         val lines = splitIntoLines(data)
 
-        val commands: List[LineData] = lines.map(splitLineIntoCommands)
+        val commands: List[CommandData] = lines.map(splitLineIntoCommands)
 
         getRegisters(commands)
     }
 
+    /**
+      * Takes the names of all the registers and
+      * Returns a map with the register names as keys and all values initialized to zero
+      * @param registerNames
+      * @return
+      */
     def initializeRegisterMap(registerNames: List[String]): Map[String, Int] = {
         registerNames.map((registerName) => (registerName, 0)).toMap
     }
 
-    case class RunCommandResult(registerValues: Map[String, Int], maxValue: Int)
+    /**
+      * Contains the values needed to complete Exercise 1 and 2
+      * @param registerValues - the values of each register at the end of computation
+      * @param maxValue - the maximum value that any register held at any point during the computation
+      */
+    case class ExecutionResult(registerValues: Map[String, Int], maxValue: Int)
 
+    /**
+      * Runs all of the commands and
+      * Returns the values of the registers at the end and the highest value encountered during computation
+      * @param allCommands - the remaining commands that need to be processed
+      * @param registerValues - the current map of registers to values
+      * @param highestValueAtAnyPoint - the current highest value encountered in any register at any point in the computation
+      * @return
+      */
     @tailrec
-    def _runCommands(allLineData: List[LineData], registerValues: Map[String, Int], highestValueAtAnyPoint: Int): RunCommandResult = {
-        allLineData match {
-            case Nil => RunCommandResult(registerValues, highestValueAtAnyPoint)
+    def _runCommands(allCommands: List[CommandData], registerValues: Map[String, Int], highestValueAtAnyPoint: Int): ExecutionResult = {
+        allCommands match {
+            case Nil => ExecutionResult(registerValues, highestValueAtAnyPoint)
             case h :: t => {
-                val conditionRegisterValue = registerValues(h.registerCondition)
+                val conditionRegisterValue = registerValues(h.conditionRegister)
 
-                val bool = h.conditionOperation match {
-                    case ConditionOperation.NOT_EQUAL_TO => conditionRegisterValue != h.conditionAmount
-                    case ConditionOperation.EQUAL => conditionRegisterValue == h.conditionAmount
-                    case ConditionOperation.GREATER_THAN_OR_EQUAL_TO => conditionRegisterValue >= h.conditionAmount
-                    case ConditionOperation.GREATER_THAN => conditionRegisterValue > h.conditionAmount
-                    case ConditionOperation.LESS_THAN => conditionRegisterValue < h.conditionAmount
-                    case ConditionOperation.LESS_THAN_OR_EQUAL_TO => conditionRegisterValue <= h.conditionAmount
+                val bool = h.conditionOperator match {
+                    case ConditionOperation.NOT_EQUAL_TO => conditionRegisterValue != h.conditionValue
+                    case ConditionOperation.EQUAL => conditionRegisterValue == h.conditionValue
+                    case ConditionOperation.GREATER_THAN_OR_EQUAL_TO => conditionRegisterValue >= h.conditionValue
+                    case ConditionOperation.GREATER_THAN => conditionRegisterValue > h.conditionValue
+                    case ConditionOperation.LESS_THAN => conditionRegisterValue < h.conditionValue
+                    case ConditionOperation.LESS_THAN_OR_EQUAL_TO => conditionRegisterValue <= h.conditionValue
                 }
 
                 val (newRegisterValues, newHighestValueAtAnyPoint) = if (bool) {
@@ -147,24 +196,47 @@ object Day_8 {
         }
     }
 
-    def runCommands(allLineData: List[LineData], registers: List[String]): RunCommandResult = {
-       _runCommands(allLineData, initializeRegisterMap(registers), 0)
+    /**
+      * Takes a list of all the commands and registers and runs all of the computations
+      * Returns the result of the computation
+      * @param allCommands - all of the commands that need to be processed
+      * @param registerNames - all of the names of the registers
+      * @return
+      */
+    def runCommands(allCommands: List[CommandData], registerNames: List[String]): ExecutionResult = {
+       _runCommands(allCommands, initializeRegisterMap(registerNames), 0)
     }
 
-    def processData(data:String): RunCommandResult = {
+    /**
+      * Parses all of the data and then processes it
+      * Returns the result of the computation
+      * @param data - lines of text containing the commands
+      * @return
+      */
+    def processData(data:String): ExecutionResult = {
         val lines = splitIntoLines(data)
 
-        val commands: List[LineData] = lines.map(splitLineIntoCommands)
+        val commands: List[CommandData] = lines.map(splitLineIntoCommands)
 
         runCommands(commands, getRegisters(commands))
     }
 
-    // Exercise 1 entry point
+    /**
+      * Exercise 1 entry point
+      * Returns the max value in any register at the end of computation
+      * @param data
+      * @return
+      */
     def getLargestValueInAnyRegisterForData(data:String): Int = {
         processData(data).registerValues.maxBy(_._2)._2
     }
 
-    // Exercise 2 entry point
+    /**
+      * Exercise 2 entry point
+      * Returns the max value in any register at any point of the computation
+      * @param data
+      * @return -
+      */
     def getLargestValueAtAnyPoint(data: String): Int = {
         processData(data).maxValue
     }
