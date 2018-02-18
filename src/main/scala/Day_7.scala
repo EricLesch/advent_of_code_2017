@@ -84,6 +84,12 @@ object Day_7 {
                           value: A) extends Node
 
     /**
+      * Need these to get rid of type erasure warnings
+      */
+    trait BranchInt extends Branch[Int]
+    trait LeafInt extends Leaf[Int]
+
+    /**
       * Parses data and returns a brnach
       * @param line
       * @return
@@ -288,10 +294,10 @@ object Day_7 {
       */
     def getSumOfNode(node: Node[Int]): Int = {
         node match {
-            case branch: Branch[Int] => {
+            case branch: BranchInt => {
                 branch.value + branch.nodes.foldLeft(0)((acc, node: Node[Int]) => acc + getSumOfNode(node))
             }
-            case leaf: Leaf[Int] => leaf.value
+            case leaf: LeafInt => leaf.value
         }
     }
 
@@ -329,7 +335,7 @@ object Day_7 {
     @tailrec
     def findUnbalancedBranch(node: Node[Int], currentResult: Option[FindUnbalancedBranchResult]): Option[FindUnbalancedBranchResult] = {
         node match {
-            case branch: Branch[Int] => {
+            case branch: BranchInt => {
                 val sumMap: Map[Int, List[Int]] = branch.nodes.map(getSumOfNode).groupBy(identity)
                 if (sumMap.toSet.size != 1) {  // the sums of the children nodes aren't all the same
                     val leastCommonSum: Int = sumMap.minBy(_._2.size)._1
@@ -353,7 +359,7 @@ object Day_7 {
                     currentResult
                 }
             }
-            case _: Leaf[Int] => None
+            case _: LeafInt => None
         }
     }
 
@@ -378,8 +384,8 @@ object Day_7 {
       */
     def getValueOfNode(node: Node[Int]): Int = {
         node match {
-            case branch: Branch[Int] => branch.value
-            case leaf: Leaf[Int] => leaf.value
+            case branch: BranchInt => branch.value
+            case leaf: LeafInt => leaf.value
         }
     }
 

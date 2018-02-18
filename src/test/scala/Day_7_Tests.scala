@@ -17,7 +17,7 @@ class Day_7_Tests extends FunSpec {
           |gyxo (61)
           |cntj (57)""".stripMargin
 
-    var testData:String =
+    val testData:String =
         """|jlbcwrl (93)
           |fzqsahw (256) -> lybovx, pdmhva
           |rxivjo (206) -> mewof, hrncqs, qgfstpq
